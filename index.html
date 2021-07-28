@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+      integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Vue Slider</title>
+  </head>
+  <body>
+    <div id="root">
+      <h1 class="text-center my-4">Vue Slider</h1>
+      <div class="row">
+        <div class="col-3 d-flex justify-content-end align-items-center">
+          <i
+            class="fas fa-chevron-left fa-4x clickable"
+            @click="previousImage"
+          ></i>
+        </div>
+        <div class="col-6">
+          <figure>
+            <img
+              v-for="(url, index) in images"
+              :src="url"
+              :alt="`image${index+1}`"
+              :class="index == activeIndex ? `active` : ``"
+              class="img-fluid"
+            />
+            <div class="dots-section d-flex justify-content-around p-3">
+              <div
+                v-for="(dot, index) in images"
+                :class="index == activeIndex ? `active` : ``"
+                class="dot d-inline-block clickable"
+                @click="setActiveIndex(index)"
+              ></div>
+            </div>
+          </figure>
+        </div>
+        <div class="col-3 d-flex justify-content-start align-items-center">
+          <i
+            class="fas fa-chevron-right fa-4x clickable"
+            @click="nextImage"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
