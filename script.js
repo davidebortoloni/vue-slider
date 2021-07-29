@@ -1,4 +1,4 @@
-let play;
+Vue.config.devtools = true;
 
 const root = new Vue({
   el: "#root",
@@ -13,8 +13,7 @@ const root = new Vue({
   },
   methods: {
     nextImage() {
-      clearInterval(play);
-      this.continuousPlayback();
+      this.autoplay();
       if (this.activeIndex === this.images.length - 1) {
         this.activeIndex = 0;
       } else {
@@ -22,8 +21,7 @@ const root = new Vue({
       }
     },
     previousImage() {
-      clearInterval(play);
-      this.continuousPlayback();
+      this.autoplay();
       if (this.activeIndex === 0) {
         this.activeIndex = this.images.length - 1;
       } else {
@@ -31,12 +29,15 @@ const root = new Vue({
       }
     },
     setActiveIndex(newIndex) {
+      this.autoplay();
       this.activeIndex = newIndex;
     },
-    continuousPlayback() {
-      play = setInterval(this.nextImage, 3000);
+    autoplay() {
+      if (this.timeoutId) clearTimeout(this.timeoutId);
+      this.timeoutId = setTimeout(this.nextImage, 3000);
     },
   },
+  created() {
+    this.autoplay();
+  },
 });
-
-root.continuousPlayback();
